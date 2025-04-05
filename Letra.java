@@ -12,6 +12,11 @@ public class Letra {
         vocales.add('i');
         vocales.add('o');
         vocales.add('u');
+        vocales.add('A');
+        vocales.add('E');
+        vocales.add('I');
+        vocales.add('O');
+        vocales.add('U');
     }
     public boolean esConsonante(){
         if (esVocal()){

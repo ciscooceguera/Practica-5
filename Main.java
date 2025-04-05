@@ -3,9 +3,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Letra letra = new Letra('a');
-        Letra letra2 = new Letra('n');
-        System.out.println(letra2.esVocal());
+        Palabra palabra = new Palabra("Hola");
+        System.out.println(palabra.obtejerPuntajePalabra());
         Scanner sc = new Scanner(System.in);
         int opc = 0;
         while (opc!= 3) {
