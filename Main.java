@@ -32,6 +32,7 @@ public class Main {
                     switch (modalidadInt){
                         case 1-> modalidad = "Regular";
                         case 2-> modalidad = "Experto";
+                        default->System.out.println("\nOpción inválida");
                     }
 
                     break;
@@ -68,6 +69,8 @@ public class Main {
                             // salir de las reglas
                             case 3:
                                 break;
+                            default:
+                                System.out.println("\nOpción inválida\n");
                         }
                     }
                     break;
@@ -78,6 +81,8 @@ public class Main {
                 // opción salir
                 case 4:
                     break;
+                default:
+                    System.out.println("\nOpción inválida\n");
             }
         }
     }
