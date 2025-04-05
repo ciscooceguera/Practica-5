@@ -18,6 +18,7 @@ public class MagoDeLasPalabras {
         jugadores = new ArrayList<>();
         letras = new ArrayList<>();
     }
+    // control del flujo del juego
     public void iniciarJuego(){
         cargarPalabras();
     }
@@ -26,7 +27,6 @@ public class MagoDeLasPalabras {
     }
     public void cargarPalabras(){
     }
-
     public void leerPalabrasDeArchivo(){
 
     }
