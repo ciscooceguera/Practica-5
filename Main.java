@@ -3,6 +3,9 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        Letra letra = new Letra('a');
+        Letra letra2 = new Letra('n');
+        System.out.println(letra2.esVocal());
         Scanner sc = new Scanner(System.in);
         int opc = 0;
         while (opc!= 3) {
