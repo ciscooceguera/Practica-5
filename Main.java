@@ -4,8 +4,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Palabra palabra = new Palabra("Hola");
-        System.out.println(palabra.obtejerPuntajePalabra());
         Scanner sc = new Scanner(System.in);
 //        MagoDeLasPalabras juego= new MagoDeLasPalabras(2, "Experto");
 //        ArrayList<Letra> letras= juego.generarLetras();
@@ -42,7 +40,9 @@ public class Main {
                         case 2-> modalidad = "Experto";
                         default->System.out.println("\nOpción inválida");
                     }
-
+                    // objeto del juego
+                    MagoDeLasPalabras juego = new MagoDeLasPalabras(numJugadores, modalidad);
+                    juego.iniciarJuego();
                     break;
                 // opción reglas
                 case 2:
