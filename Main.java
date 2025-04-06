@@ -1,9 +1,15 @@
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+//        MagoDeLasPalabras juego= new MagoDeLasPalabras(2, "Experto");
+//        ArrayList<Letra> letras= juego.generarLetras();
+//        letras.forEach(letra->{
+//            System.out.println(letra.toString());
+//        });
         int opc = 0;
         while (opc!= 3) {
             // pregunto que acció quiere realizar el usuario
