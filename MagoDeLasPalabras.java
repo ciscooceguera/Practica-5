@@ -82,13 +82,13 @@ public class MagoDeLasPalabras {
                     // pasar turno
                     case 2:
                         // actualizo el puntaje
-                        Jugador jugador = jugadores.get(turno);
+                        Jugador jugador = jugadores.get(turno-1);
                         if (flagJugadorAdivinoPalabra==1){
                             jugador.cambiarPuntaje(-5);
-                            jugadores.set(turno, jugador);
+                            jugadores.set(turno-1, jugador);
                         }else{
                             jugador.cambiarPuntaje(puntajeTurno);
-                            jugadores.set(turno, jugador);
+                            jugadores.set(turno-1, jugador);
                         }
                         puntajeTurno = 0;
                         cambiarTurno();
@@ -98,6 +98,7 @@ public class MagoDeLasPalabras {
             }
         }
         mostrarGanador();
+        mostrarPuntajes();
     }
     public boolean validarPalabraEnHashSet(){
         return palabrasUsadasEnElTurno.contains(palabra);
@@ -106,12 +107,33 @@ public class MagoDeLasPalabras {
     public void mostrarPuntajes(){
         for (int i = 0; i<numJugadores; i++){
             Jugador jugador = jugadores.get(i);
-            System.out.println("Puntaje jugador " + i + " " + jugador.obtenerPuntaje());
+            System.out.println("Puntaje jugador " + i + ": " + jugador.obtenerPuntaje());
         }
     }
     // mostrar ganador
     public void mostrarGanador(){
-        System.out.println("Ha ganado el jugador " + turno);
+        ArrayList<Integer> jugadoresGanadores = new ArrayList<>();
+        int ganador = 0;
+        for (int i = 0; i<numJugadores-1; i++){
+            Jugador jugador = jugadores.get(i);
+            Jugador jugadorSig = jugadores.get(i+1);
+            if (jugador.obtenerPuntaje()<jugadorSig.obtenerPuntaje()){
+                ganador = i+1;
+            }else if (jugador.obtenerPuntaje() == jugadorSig.obtenerPuntaje()){
+                jugadoresGanadores.add(ganador);
+                jugadoresGanadores.add(ganador+1);
+                ganador = -2;
+            }
+        }
+        ganador+=1;
+        if (ganador==-1){
+            System.out.println("Empate, ganadores:");
+            for (int i = 0; i < jugadoresGanadores.size(); i++){
+                System.out.println("Jugador " + jugadoresGanadores.get(i));
+            }
+        }else {
+            System.out.println("Ha ganado el jugador " + ganador);
+        }
     }
     // encontrar idx palabra en hasmap
     public int encontrarPosicionPalabraEnHash(){
