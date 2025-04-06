@@ -18,16 +18,32 @@ public class MagoDeLasPalabras {
         palabras = new HashMap<>();
         jugadores = new ArrayList<>();
         letras = new ArrayList<>();
+        contadorRonda = 0;
+    }
+    // inicializo puntajes en 0s
+    public void inicializarPuntajes(){
+        for (int i = 0; i<numJugadores; i++){
+            Jugador jugador = new Jugador();
+            jugadores.add(jugador);
+        }
     }
     // control del flujo del juego
     public void iniciarJuego(){
         cargarPalabras();
+        inicializarPuntajes();
+        while (contadorRonda<3){
+
+        }
+    }
+    public void hayGanador(){
+
     }
     public void cambiarTurno(){
         turno = turno%numJugadores+1;
     }
     public void cargarPalabras(){
     }
+
     public void leerPalabrasDeArchivo(){
 
     }
