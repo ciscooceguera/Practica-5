@@ -6,6 +6,9 @@ public class Palabra {
     private int puntaje;
     // constructor, recibe palabra
     public Palabra(String palabra){
+        if (palabra == null || palabra.isEmpty()) {
+            throw new IllegalArgumentException("La palabra no puede ser nula o vacía.");
+        }
         this.palabra = palabra;
         puntaje = 0;
     }
@@ -29,5 +32,9 @@ public class Palabra {
     public boolean palabraEsIgualA(Palabra otraPalabra){
         // compara si son iguales ignorando mayusculas y minusculas
         return this.palabra.equalsIgnoreCase(otraPalabra.palabra);
+    }
+
+    public String toString() {
+        return palabra;
     }
 }
