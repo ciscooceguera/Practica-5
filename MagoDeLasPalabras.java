@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class MagoDeLasPalabras {
@@ -10,7 +11,7 @@ public class MagoDeLasPalabras {
     private int turno, contadorRonda,numJugadores;
     private String modalidad;
     private Palabra palabra;
-    private ArrayList<Palabra> palabrasUsadasEnElTurno;
+    private HashSet<Palabra> palabrasUsadasEnElTurno;
     private ArrayList<Jugador> jugadores;
     private ArrayList<Letra> letras;
     private HashMap<Palabra, Integer> palabrasMap;
@@ -25,7 +26,7 @@ public class MagoDeLasPalabras {
         jugadores = new ArrayList<>();
         letras = new ArrayList<>();
         palabrasMap = new HashMap<>();
-        palabrasUsadasEnElTurno = new ArrayList<>();
+        palabrasUsadasEnElTurno = new HashSet<>();
         contadorRonda = 0;
     }
     // inicializo puntajes en 0s
@@ -62,14 +63,18 @@ public class MagoDeLasPalabras {
                                 System.out.println("Solo puedes usar las letras en pantalla !");
                             }else{
                                 if(validarPalabraEnArchivoTXT()) {
-                                    System.out.println("Palabra correcta !");
-                                    palabrasUsadasEnElTurno.add(palabra);
-                                    puntajeTurno += encontrarPosicionPalabraEnHash();
-                                    System.out.println("Puntaje actual del jugador " + turno + ": " + puntajeTurno);
+                                    if (!validarPalabraEnHashSet()) {
+                                        System.out.println("Palabra correcta !");
+                                        palabrasUsadasEnElTurno.add(palabra);
+                                        puntajeTurno += encontrarPosicionPalabraEnHash();
+                                        System.out.println("Puntaje actual del jugador " + turno + ": " + puntajeTurno);
 
-                                    flagJugadorAdivinoPalabra = 1;
-                                }else{
-                                    System.out.println("Palabra incorrecta");
+                                        flagJugadorAdivinoPalabra = 1;
+                                    } else {
+                                        System.out.println("Palabra ya adivinada previamente ");
+                                    }
+                                }else {
+                                    System.out.println("Palabra incorrecta ");
                                 }
                             }
                         }
@@ -93,6 +98,9 @@ public class MagoDeLasPalabras {
             }
         }
         mostrarGanador();
+    }
+    public boolean validarPalabraEnHashSet(){
+        return palabrasUsadasEnElTurno.contains(palabra);
     }
     // mostrar puntajes
     public void mostrarPuntajes(){
