@@ -22,7 +22,7 @@ public class Palabra {
             if (letra.esVocal()){
                 puntaje+=5;
             // es consonante
-            }else{
+            }else if (letra.esConsonante()){
                 puntaje+=3;
             }
         }

@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -48,8 +49,15 @@ public class MagoDeLasPalabras {
         }
     }
 
-    public void leerPalabrasDeArchivo(){
-
+    public ArrayList<Letra> generarLetras(){
+        ArrayList<Letra> extraccion = new ArrayList<>();
+        for (int i = 0; i < 10; i++){
+            Letra temp = new Letra('0');
+            Character toma =  temp.tomarLetra();
+            Letra letra = new Letra(toma);
+            extraccion.add(letra);
+        }
+        return extraccion;
     }
 
     public void mostrarPalabrasDisponibles(){
