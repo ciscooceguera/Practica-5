@@ -33,7 +33,30 @@ public class Palabra {
         // compara si son iguales ignorando mayusculas y minusculas
         return this.palabra.equalsIgnoreCase(otraPalabra.palabra);
     }
-
+    // separar palabra en arraylist de caracteres
+    public ArrayList<Letra> obtenerLetras(){
+        ArrayList<Letra> letras = new ArrayList<>();
+        for (int i = 0; i<palabra.length(); i++){
+            Letra letra = new Letra(palabra.charAt(i));
+            letras.add(letra);
+        }
+        return letras;
+    }
+    public boolean palabraContieneLasLetras(ArrayList<Letra> letrasUsadas){
+        ArrayList<Letra> palabraUsadaArrayList = obtenerLetras();
+        int contadorLetrasUsadas = 0;
+        for (int i = 0; i < palabraUsadaArrayList.size(); i++){
+            Letra letra = palabraUsadaArrayList.get(i);
+            for (int j = 0; j < letrasUsadas.size(); j++){
+                Letra letraPermitida = letrasUsadas.get(j);
+                if (letra.toString().equals(letraPermitida.toString())){
+                    contadorLetrasUsadas++;
+                    break;
+                }
+            }
+        }
+        return contadorLetrasUsadas == palabraUsadaArrayList.size();
+    }
     public String toString() {
         return palabra;
     }
