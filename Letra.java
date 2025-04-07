@@ -71,4 +71,7 @@ public class Letra {
     public String toString() {
         return letra+"";
     }
+    public Character getLetra(){
+        return letra;
+    }
 }
