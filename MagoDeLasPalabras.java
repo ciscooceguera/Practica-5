@@ -86,7 +86,6 @@ public class MagoDeLasPalabras {
                             jugadores.put(turno-1, puntajeTemp);
                         // sí adivinó
                         }else{
-                            System.out.println(puntajeTemp);
                             puntajeTemp += puntajeTurno;
                             jugadores.remove(turno-1);
                             jugadores.put(turno-1, puntajeTemp);
