@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Palabra {
     // atributos
@@ -42,17 +43,14 @@ public class Palabra {
         }
         return letras;
     }
-    public boolean palabraContieneLasLetras(ArrayList<Letra> letrasUsadas){
+    public boolean palabraContieneLasLetras(HashSet<Letra> letrasUsadas){
         ArrayList<Letra> palabraUsadaArrayList = obtenerLetras();
         int contadorLetrasUsadas = 0;
         for (int i = 0; i < palabraUsadaArrayList.size(); i++){
             Letra letra = palabraUsadaArrayList.get(i);
-            for (int j = 0; j < letrasUsadas.size(); j++){
-                Letra letraPermitida = letrasUsadas.get(j);
-                if (letra.toString().equals(letraPermitida.toString())){
-                    contadorLetrasUsadas++;
-                    break;
-                }
+            if (letrasUsadas.contains(letra)){
+                contadorLetrasUsadas++;
+                break;
             }
         }
         return contadorLetrasUsadas == palabraUsadaArrayList.size();
