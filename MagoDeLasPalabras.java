@@ -259,7 +259,6 @@ public class MagoDeLasPalabras {
         if(jugadorPalabrasUsadas.size()==0){
             System.out.println("\nNo hay palabras del jugador\n");
         } else {
-            for(int i=0; i<jugadores.size(); i++){
                 if (jugadorPalabrasUsadas.containsKey(jugador-1)){
                     while(iterator.hasNext()){
                         Palabra palabra = iterator.next();
@@ -270,7 +269,6 @@ public class MagoDeLasPalabras {
                         }
                     }
                 }
-            }
             System.out.println("Puntaje del jugador: "+puntajeAcumulado+"\n");
         }
     }
