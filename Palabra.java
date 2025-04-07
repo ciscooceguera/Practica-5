@@ -44,12 +44,14 @@ public class Palabra {
         }
         return letras;
     }
-    public boolean palabraContieneLasLetras(HashSet<Letra> letrasUsadas){
+    public boolean palabraContieneLasLetras(HashSet<Letra> letrasUsadas, Letra letraProhibida){
         ArrayList<Letra> palabraUsadaArrayList = obtenerLetras();
         int contadorLetrasUsadas = 0;
         for (Letra letra : palabraUsadaArrayList) {
             if (letrasUsadas.contains(letra)) {
-                contadorLetrasUsadas++;
+                if (!letra.equals(letraProhibida)){
+                    contadorLetrasUsadas++;
+                }
             }
         }
         return contadorLetrasUsadas == palabraUsadaArrayList.size();

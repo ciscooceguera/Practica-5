@@ -61,7 +61,7 @@ public class Main {
                 // opción reglas
                 case 2:
                     int reglasOpc = 0;
-                    while(reglasOpc!=2) {
+                    while(reglasOpc!=3) {
                         System.out.println("1. Reglas modalidad Regular\n2. Reglas modalidad Experto\n3. Salir\nIngresa una opción: ");
                         if (sc.hasNextInt()) {
                             reglasOpc = sc.nextInt();

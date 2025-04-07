@@ -8,6 +8,7 @@ public class MagoDeLasPalabras {
     private int turno, contadorRonda,numJugadores;
     private String modalidad;
     private Palabra palabra;
+    private Letra letraProhibida;
     private HashSet<Palabra> palabrasUsadasEnElTurno;
     private HashMap<Integer,Integer> jugadores;
     private HashMap<Integer,Palabra> jugadorPalabrasUsadas;
@@ -26,12 +27,25 @@ public class MagoDeLasPalabras {
         palabrasMap = new HashMap<>();
         palabrasUsadasEnElTurno = new HashSet<>();
         jugadorPalabrasUsadas = new HashMap<>();
+        letraProhibida = new Letra('3');
         contadorRonda = 0;
     }
     // inicializo puntajes en 0s
     public void inicializarPuntajes(){
         for (int i = 0; i<numJugadores; i++){
             jugadores.put(i,0);
+        }
+    }
+    // tomar una letra de letras para el modo dificil
+    public void generarLetraProhibida(){
+        Random rnd = new Random();
+        int numRandom = rnd.nextInt(9), contador = 0;
+        for (Letra letra : letras){
+            contador++;
+            if (contador == numRandom){
+                letraProhibida = letra;
+                break;
+            }
         }
     }
     // control del flujo del juego
@@ -41,6 +55,10 @@ public class MagoDeLasPalabras {
         while (contadorRonda!=3){
             // creo las palabras para el turno y las muestro
             generarLetras();
+            // si la modalidad es dificil
+            if (modalidad.equals("Experto")){
+                generarLetraProhibida();
+            }
             // mientras quiera jugar
             int opcTurno = 1;
             int puntajeTurno = 0;
@@ -58,7 +76,7 @@ public class MagoDeLasPalabras {
                             solicitarPalabra();
                             validacionDeIntento = evaluarSiSeUsaronSoloLasLetrasPermitidas();
                             if (!validacionDeIntento) {
-                                System.out.println("Solo puedes usar las letras en pantalla !");
+                                System.out.println("Solo puedes usar las letras en permitidas !");
                             }else{
                                 if(validarPalabraEnArchivoTXT()) {
                                     if (!validarPalabraEnHashSet()) {
@@ -174,7 +192,7 @@ public class MagoDeLasPalabras {
         if (palabra.toString().equals("1")){
             return true;
         }
-        return palabra.palabraContieneLasLetras(letras);
+        return palabra.palabraContieneLasLetras(letras,letraProhibida);
     }
     // metodo para pedir que el jugador cree una palabra con las letras dadas
     public void solicitarPalabra(){
@@ -215,6 +233,9 @@ public class MagoDeLasPalabras {
         Iterator<Letra> iterator = letras.iterator();
         while (iterator.hasNext()) {
             System.out.println(iterator.next());
+        }
+        if (modalidad.equals("Experto")) {
+            System.out.println("Letra Prohibida: " + letraProhibida);
         }
     }
     // generar las 10 letras
