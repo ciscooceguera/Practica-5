@@ -5,6 +5,7 @@ import java.util.*;
 
 public class MagoDeLasPalabras {
     // atributos
+    private HashSet<Integer> numPaso;
     private int turno, contadorRonda,numJugadores;
     private String modalidad;
     private Palabra palabra;
@@ -18,6 +19,7 @@ public class MagoDeLasPalabras {
     public MagoDeLasPalabras(int numJugadores, String modalidad){
         // siempre inicia el jugador 1
         turno = 1;
+        numPaso = new HashSet<>();
         // guardo lo recibido de los parámetros del constructor en los atributos, respectivamente
         this.modalidad = modalidad;
         this.numJugadores = numJugadores;
@@ -57,6 +59,7 @@ public class MagoDeLasPalabras {
             System.out.println("\n**********");
             System.out.println("*Ronda "+(contadorRonda+1)+"*");
             System.out.println("**********");
+            System.out.println("\nRonda Actual "+(contadorRonda+1));
             if (contadorRonda!= contadorRondaTemp){
                 // creo las palabras para el turno y las muestro
                 generarLetras();
@@ -76,23 +79,30 @@ public class MagoDeLasPalabras {
                 switch (opcTurno){
                     // jugar
                     case 1:
-                        // establezco como falso
-                        boolean validacionDeIntento = false;
                         // mientras no se usen las letras permitidas o no se solicite salir
-                        while (!validacionDeIntento) {
                             solicitarPalabra();
-                            validacionDeIntento = evaluarSiSeUsaronSoloLasLetrasPermitidas();
+                            boolean validacionDeIntento = evaluarSiSeUsaronSoloLasLetrasPermitidas();
                             if (!validacionDeIntento) {
-                                System.out.println("\nSolo puedes usar las letras en permitidas !");
+
+                                System.out.println("Solo puedes usar las letras permitidas !");
+                                int puntajeTemp = jugadores.get(turno-1);
+                                // no adivinó
+                                puntajeTemp -= 5;
+                                jugadores.remove(turno-1);
+                                jugadores.put(turno-1, puntajeTemp);
+                                // sí adivinó
+                                puntajeTurno = 0;
+                                cambiarTurno();
                             }else{
                                 if(validarPalabraEnArchivoTXT()) {
                                     if (!validarPalabraEnHashSet()) {
                                         opcTurno = 2;
-                                        System.out.println("\nPalabra correcta !");
+
+                                        System.out.println("Palabra correcta !");
                                         palabrasUsadasEnElTurno.add(palabra);
                                         jugadorPalabrasUsadas.put(palabra,turno-1);
                                         puntajeTurno += encontrarValuePalabraEnHash();
-                                        System.out.println("\nPuntaje de la palabra: " + palabra.obtejerPuntajePalabra());
+                                        System.out.println("Puntaje de la palabra: " + palabra.obtejerPuntajePalabra());
 
                                         flagJugadorAdivinoPalabra = 1;
                                         cambiarTurno();
@@ -102,13 +112,34 @@ public class MagoDeLasPalabras {
                                     }
                                 }else {
                                     System.out.println("\nPalabra incorrecta ");
+                                        System.out.println("Palabra ya adivinada previamente ");
+                                        int puntajeTemp = jugadores.get(turno-1);
+                                        // no adivinó
+                                        puntajeTemp -= 5;
+                                        jugadores.remove(turno-1);
+                                        jugadores.put(turno-1, puntajeTemp);
+                                        // sí adivinó
+                                        puntajeTurno = 0;
+                                        cambiarTurno();
+                                    }
+                                }else if (!palabra.toString().equals("1")){
+                                    System.out.println("Palabra incorrecta ");
+                                    int puntajeTemp = jugadores.get(turno-1);
+                                    // no adivinó
+                                    puntajeTemp -= 5;
+                                    jugadores.remove(turno-1);
+                                    jugadores.put(turno-1, puntajeTemp);
+                                    // sí adivinó
+                                    puntajeTurno = 0;
+                                    cambiarTurno();
                                 }
                             }
-                        }
+
                         break;
                     // pasar turno
                     case 2:
                         // actualizo el puntaje
+                        numPaso.add(turno-1);
                         int puntajeTemp = jugadores.get(turno-1);
                         // no adivinó
                         if (flagJugadorAdivinoPalabra==0){
@@ -126,7 +157,7 @@ public class MagoDeLasPalabras {
                         break;
                     // case ver palabras
                     case 3:
-                        mostrarPalabrasJugador();
+                        mostrarPalabrasJugadores();
                         break;
                 }
 
@@ -213,13 +244,18 @@ public class MagoDeLasPalabras {
         palabra = new Palabra(palabraTemporal);
     }
     public void cambiarTurno(){
-        if (turno==numJugadores){
+        if (numPaso.size() == numJugadores) {
             contadorRonda++;
+            numPaso.clear();
         }
         turno = turno%numJugadores+1;
+        if (numPaso.contains(turno-1)){
+            cambiarTurno();
+        }
     }
     public void cargarPalabras(){
-        String nombreArchivo ="C:\\Users\\joser\\IdeaProjects\\Practica-5\\palabras.txt";
+
+        String nombreArchivo ="C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Practica-5\\palabras.txt";
         try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
             String palabra;
             Integer puntaje;
@@ -261,21 +297,17 @@ public class MagoDeLasPalabras {
         }
     }
 
-    public void mostrarPalabrasJugador() {
+
+    public void mostrarPalabrasJugadores() {
         Iterator <Palabra> iterator = jugadorPalabrasUsadas.keySet().iterator();
-        if (jugadorPalabrasUsadas.containsValue(turno-1)) {
-            int puntajeAcumulado = 0;
+        if (!jugadorPalabrasUsadas.isEmpty()) {
+            System.out.println("Listado de palabras usadas: ");
             while (iterator.hasNext()) {
                 Palabra palabra = iterator.next();
-                if (jugadorPalabrasUsadas.get(palabra).equals(turno - 1)) {
-                    int puntaje = palabra.obtejerPuntajePalabra();
-                    puntajeAcumulado += puntaje;
-                    System.out.println("\nPalabra usada: " + palabra + ". Puntaje: " + puntaje);
-                }
+                System.out.println("Palabra : " + palabra.toString() + ". Puntaje: " + palabra.obtejerPuntajePalabra());
             }
-            System.out.println("\nPuntaje del jugador " + turno + ": " + puntajeAcumulado);
         }else{
-            System.out.println("\nAún no se han adivinado palabras !");
+            System.out.println("Aún no se han adivinado palabras !");
         }
     }
 }
