@@ -52,9 +52,13 @@ public class MagoDeLasPalabras {
     public void iniciarJuego(){
         cargarPalabras();
         inicializarPuntajes();
+        int contadorRondaTemp = contadorRonda-1;
         while (contadorRonda!=3){
-            // creo las palabras para el turno y las muestro
-            generarLetras();
+            if (contadorRonda!= contadorRondaTemp){
+                // creo las palabras para el turno y las muestro
+                generarLetras();
+                contadorRondaTemp++;
+            }
             // si la modalidad es dificil
             if (modalidad.equals("Experto")){
                 generarLetraProhibida();
@@ -80,13 +84,16 @@ public class MagoDeLasPalabras {
                             }else{
                                 if(validarPalabraEnArchivoTXT()) {
                                     if (!validarPalabraEnHashSet()) {
+                                        opcTurno = 2;
                                         System.out.println("Palabra correcta !");
                                         palabrasUsadasEnElTurno.add(palabra);
                                         jugadorPalabrasUsadas.put(palabra,turno-1);
                                         puntajeTurno += encontrarValuePalabraEnHash();
-                                        System.out.println("Puntaje de la palabra: " + puntajeTurno);
+                                        System.out.println("Puntaje de la palabra: " + palabra.obtejerPuntajePalabra());
 
                                         flagJugadorAdivinoPalabra = 1;
+                                        cambiarTurno();
+
                                     } else {
                                         System.out.println("Palabra ya adivinada previamente ");
                                     }
@@ -202,9 +209,6 @@ public class MagoDeLasPalabras {
         String palabraTemporal = sc.nextLine();
         palabra = new Palabra(palabraTemporal);
     }
-    public void hayGanador(){
-
-    }
     public void cambiarTurno(){
         if (turno==numJugadores){
             contadorRonda++;
@@ -242,7 +246,7 @@ public class MagoDeLasPalabras {
     public void generarLetras(){
         letras.clear();
         // ciclo for 0 - 9
-        while (letras.size()<32){
+        while (letras.size()<10){
             // creo un objeto letra y la agrego al arraylist de letras
             Letra letraTemporal = new Letra('0');
             Character toma =  letraTemporal.tomarLetra();
