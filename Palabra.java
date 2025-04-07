@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Objects;
 
 public class Palabra {
     // atributos
@@ -43,19 +44,33 @@ public class Palabra {
         }
         return letras;
     }
-    public boolean palabraContieneLasLetras(HashSet<Letra> letrasUsadas){
+    public boolean palabraContieneLasLetras(HashSet<Letra> letrasUsadas, Letra letraProhibida){
         ArrayList<Letra> palabraUsadaArrayList = obtenerLetras();
         int contadorLetrasUsadas = 0;
-        for (int i = 0; i < palabraUsadaArrayList.size(); i++){
-            Letra letra = palabraUsadaArrayList.get(i);
-            if (letrasUsadas.contains(letra)){
-                contadorLetrasUsadas++;
-                break;
+        for (Letra letra : palabraUsadaArrayList) {
+            if (letrasUsadas.contains(letra)) {
+                if (!letra.equals(letraProhibida)){
+                    contadorLetrasUsadas++;
+                }
             }
         }
         return contadorLetrasUsadas == palabraUsadaArrayList.size();
     }
     public String toString() {
         return palabra;
+    }
+    // metodos usados por contains()
+    public boolean equals(Object objeto){
+        // si apuntan al mismo espacio en memoria son iguales
+        if (this == objeto) return true;
+        // si es null o no es de la misma clase no son iguales
+        if (objeto == null || getClass() != objeto.getClass()) return false;
+        // convierto a tipo letra
+        Palabra otra = (Palabra)objeto;
+        // compara sus atributos letra de ambos objetos
+        return this.palabra.equals(otra.palabra);
+    }
+    public int hashCode() {
+        return Objects.hash(palabra);
     }
 }
