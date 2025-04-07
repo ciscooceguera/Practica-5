@@ -11,7 +11,7 @@ public class MagoDeLasPalabras {
     private Letra letraProhibida;
     private HashSet<Palabra> palabrasUsadasEnElTurno;
     private HashMap<Integer,Integer> jugadores;
-    private HashMap<Integer,Palabra> jugadorPalabrasUsadas;
+    private HashMap<Palabra,Integer> jugadorPalabrasUsadas;
     private HashSet<Letra> letras;
     private HashMap<Palabra, Integer> palabrasMap;
 
@@ -82,7 +82,7 @@ public class MagoDeLasPalabras {
                                     if (!validarPalabraEnHashSet()) {
                                         System.out.println("Palabra correcta !");
                                         palabrasUsadasEnElTurno.add(palabra);
-                                        jugadorPalabrasUsadas.put(turno-1,palabra);
+                                        jugadorPalabrasUsadas.put(palabra,turno-1);
                                         puntajeTurno += encontrarValuePalabraEnHash();
                                         System.out.println("Puntaje de la palabra: " + puntajeTurno);
 
@@ -212,7 +212,7 @@ public class MagoDeLasPalabras {
         turno = turno%numJugadores+1;
     }
     public void cargarPalabras(){
-        String nombreArchivo ="C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\PRACTICA_5\\Practica-5\\out\\production\\Practica-5\\palabras.txt";
+        String nombreArchivo ="C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Practica-5\\palabras.txt";
         try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
             String palabra;
             Integer puntaje;
@@ -242,7 +242,7 @@ public class MagoDeLasPalabras {
     public void generarLetras(){
         letras.clear();
         // ciclo for 0 - 9
-        while (letras.size()<10){
+        while (letras.size()<32){
             // creo un objeto letra y la agrego al arraylist de letras
             Letra letraTemporal = new Letra('0');
             Character toma =  letraTemporal.tomarLetra();
@@ -253,23 +253,20 @@ public class MagoDeLasPalabras {
     }
 
     public void mostrarPalabrasJugador() {
-        int puntajeAcumulado = 0;
-        Iterator<Palabra> iterator = palabrasUsadasEnElTurno.iterator();
-        System.out.println("\nPalabras del jugador "+(turno));
-        if(!jugadorPalabrasUsadas.containsKey(turno-1)){
-            System.out.println("\nNo hay palabras del jugador\n");
-        } else {
-            while (iterator.hasNext()){
-                if (jugadorPalabrasUsadas.containsKey(turno-1)){
-                        Palabra palabra = iterator.next();
-                        puntajeAcumulado += palabra.obtejerPuntajePalabra();
-                        int puntaje = palabra.obtejerPuntajePalabra();
-                        if(palabrasUsadasEnElTurno.contains(palabra)){
-                            System.out.println("Palabra usada: "+palabra+". Puntos: "+puntaje);
-                        }
+        Iterator <Palabra> iterator = jugadorPalabrasUsadas.keySet().iterator();
+        if (jugadorPalabrasUsadas.containsValue(turno-1)) {
+            int puntajeAcumulado = 0;
+            while (iterator.hasNext()) {
+                Palabra palabra = iterator.next();
+                if (jugadorPalabrasUsadas.get(palabra).equals(turno - 1)) {
+                    int puntaje = palabra.obtejerPuntajePalabra();
+                    puntajeAcumulado += puntaje;
+                    System.out.println("Palabra usada: " + palabra + ". Puntaje: " + puntaje);
                 }
             }
-            System.out.println("Puntaje del jugador: "+puntajeAcumulado+"\n");
+            System.out.println("Puntaje del jugador " + turno + ": " + puntajeAcumulado);
+        }else{
+            System.out.println("Aún no se han adivinado palabras !");
         }
     }
 }
