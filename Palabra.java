@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
-
 public class Palabra {
     // atributos
     private String palabra;

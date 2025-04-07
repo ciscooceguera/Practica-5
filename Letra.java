@@ -73,7 +73,6 @@ public class Letra {
         }
         return letra;
     }
-
     public String toString() {
         return letra+"";
     }
