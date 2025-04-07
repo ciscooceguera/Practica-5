@@ -76,6 +76,7 @@ hermano
 hermana
 hijo
 hija
+hilo
 nieto
 nieta
 primo
@@ -254,6 +255,7 @@ metro
 camino
 vía
 ruta
+piano
 auto
 bus
 número

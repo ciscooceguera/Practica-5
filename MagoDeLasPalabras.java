@@ -62,8 +62,8 @@ public class MagoDeLasPalabras {
                                     if (!validarPalabraEnHashSet()) {
                                         System.out.println("Palabra correcta !");
                                         palabrasUsadasEnElTurno.add(palabra);
-                                        puntajeTurno += encontrarPosicionPalabraEnHash();
-                                        System.out.println("Puntaje actual del jugador " + turno + ": " + puntajeTurno);
+                                        puntajeTurno += encontrarValuePalabraEnHash();
+                                        System.out.println("Puntaje de la palabra: " + puntajeTurno);
 
                                         flagJugadorAdivinoPalabra = 1;
                                     } else {
@@ -80,13 +80,13 @@ public class MagoDeLasPalabras {
                         // actualizo el puntaje
                         int puntajeTemp = jugadores.get(turno-1);
                         // no adivinó
-                        if (flagJugadorAdivinoPalabra==1){
+                        if (flagJugadorAdivinoPalabra==0){
                             puntajeTemp -= 5;
                             jugadores.remove(turno-1);
                             jugadores.put(turno-1, puntajeTemp);
                         // sí adivinó
                         }else{
-                            puntajeTemp += jugadores.get(turno-1);
+                            System.out.println(puntajeTemp);
                             puntajeTemp += puntajeTurno;
                             jugadores.remove(turno-1);
                             jugadores.put(turno-1, puntajeTemp);
@@ -107,7 +107,8 @@ public class MagoDeLasPalabras {
     // mostrar puntajes
     public void mostrarPuntajes(){
         for (int i = 0; i<numJugadores; i++){
-            System.out.println("Puntaje jugador " + i + ": " + jugadores.get(i));
+            int j = i+1;
+            System.out.println("Puntaje jugador " + j + ": " + jugadores.get(i));
         }
     }
     // mostrar ganador
@@ -119,7 +120,7 @@ public class MagoDeLasPalabras {
             int jugadorSig = jugadores.get(i+1);
             if (jugador<jugadorSig){
                 ganador = i+1;
-            }else if (jugador<jugadorSig){
+            }else if (jugador==jugadorSig){
                 jugadoresGanadores.add(ganador);
                 jugadoresGanadores.add(ganador+1);
                 ganador = -2;
@@ -128,15 +129,15 @@ public class MagoDeLasPalabras {
         ganador+=1;
         if (ganador==-1){
             System.out.println("Empate, ganadores:");
-            for (int i = 0; i < jugadoresGanadores.size(); i++){
-                System.out.println("Jugador " + jugadoresGanadores.get(i));
+            for (Integer jugadoresGanadore : jugadoresGanadores) {
+                System.out.println("Jugador " + jugadoresGanadore);
             }
         }else {
             System.out.println("Ha ganado el jugador " + ganador);
         }
     }
     // encontrar idx palabra en hasmap
-    public int encontrarPosicionPalabraEnHash(){
+    public int encontrarValuePalabraEnHash(){
         return palabrasMap.get(palabra);
     }
     // validar palabra
@@ -214,14 +215,12 @@ public class MagoDeLasPalabras {
     public void generarLetras(){
         letras.clear();
         // ciclo for 0 - 9
-        while (letras.size()<10){
+        while (letras.size()<32){
             // creo un objeto letra y la agrego al arraylist de letras
             Letra letraTemporal = new Letra('0');
             Character toma =  letraTemporal.tomarLetra();
             Letra letra = new Letra(toma);
-            if (!letras.contains(letra.getLetra())){
-                letras.add(letra);
-            }
+            letras.add(letra);
 
         }
     }

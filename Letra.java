@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 public class Letra {
@@ -15,6 +16,11 @@ public class Letra {
         vocales.add('i');
         vocales.add('o');
         vocales.add('u');
+        vocales.add('á');
+        vocales.add('é');
+        vocales.add('í');
+        vocales.add('ó');
+        vocales.add('ú');
         consonantes = new ArrayList<>();
         consonantes.add('b');
         consonantes.add('c');
@@ -74,4 +80,19 @@ public class Letra {
     public Character getLetra(){
         return letra;
     }
+    // metodos usados por contains()
+    public boolean equals(Object objeto){
+        // si apuntan al mismo espacio en memoria son iguales
+        if (this == objeto) return true;
+        // si es null o no es de la misma clase no son iguales
+        if (objeto == null || getClass() != objeto.getClass()) return false;
+        // convierto a tipo letra
+        Letra otra = (Letra)objeto;
+        // compara sus atributos letra de ambos objetos
+        return this.letra == otra.letra;
+    }
+    public int hashCode() {
+        return Objects.hash(letra);
+    }
+    //
 }
