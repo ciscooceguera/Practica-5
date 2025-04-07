@@ -91,6 +91,7 @@ public class MagoDeLasPalabras {
                             jugadores.put(turno - 1, puntajeTemp);
                             // sí adivinó
                             puntajeTurno = 0;
+                            mostrarPuntajes();
                             cambiarTurno();
                         } else {
                             if (validarPalabraEnArchivoTXT()) {
@@ -103,8 +104,8 @@ public class MagoDeLasPalabras {
                                     puntajeTurno += encontrarValuePalabraEnHash();
                                     System.out.println("Puntaje de la palabra: " + palabra.obtejerPuntajePalabra());
                                     flagJugadorAdivinoPalabra = 1;
+                                    mostrarPuntajes();
                                     cambiarTurno();
-
                                 } else {
                                     System.out.println("\nPalabra ya adivinada previamente ");
                                     int puntajeTemp = jugadores.get(turno - 1);
@@ -114,6 +115,7 @@ public class MagoDeLasPalabras {
                                     jugadores.put(turno - 1, puntajeTemp);
                                     // sí adivinó
                                     puntajeTurno = 0;
+                                    mostrarPuntajes();
                                     cambiarTurno();
                                 }
                             } else if (!palabra.toString().equals("1")) {
@@ -125,6 +127,7 @@ public class MagoDeLasPalabras {
                                 jugadores.put(turno - 1, puntajeTemp);
                                 // sí adivinó
                                 puntajeTurno = 0;
+                                mostrarPuntajes();
                                 cambiarTurno();
                             }
                         }
@@ -146,6 +149,7 @@ public class MagoDeLasPalabras {
                                     jugadores.put(turno - 1, puntajeTemp);
                                 }
                                 puntajeTurno = 0;
+                                mostrarPuntajes();
                                 cambiarTurno();
                                 break;
                             // case ver palabras
@@ -165,9 +169,10 @@ public class MagoDeLasPalabras {
     }
     // mostrar puntajes
     public void mostrarPuntajes(){
+        System.out.println("\nPuntajes:");
         for (int i = 0; i<numJugadores; i++){
             int j = i+1;
-            System.out.println("Puntaje jugador " + j + ": " + jugadores.get(i));
+            System.out.println("\nPuntaje Jugador " + j + ": " + jugadores.get(i));
         }
     }
     // mostrar ganador
@@ -249,7 +254,7 @@ public class MagoDeLasPalabras {
     }
     public void cargarPalabras(){
 
-        String nombreArchivo ="C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Practica-5\\palabras.txt";
+        String nombreArchivo ="C:\\Users\\joser\\IdeaProjects\\Practica-5\\palabras.txt";
         try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
             String palabra;
             Integer puntaje;
@@ -305,4 +310,3 @@ public class MagoDeLasPalabras {
         }
     }
 }
-
