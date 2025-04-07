@@ -15,7 +15,7 @@ public class Palabra {
         puntaje = 0;
     }
     // obtiene el puntaje de la palabra
-    public int obtejerPuntajePalabra(){
+    public int obtenerPuntajePalabra(){
         // itero cada elemento del string
         for (int i = 0; i<palabra.length(); i++){
             // creo objeto de la palabra letra

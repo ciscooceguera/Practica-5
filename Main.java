@@ -5,11 +5,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-//        MagoDeLasPalabras juego= new MagoDeLasPalabras(2, "Experto");
-//        ArrayList<Letra> letras= juego.generarLetras();
-//        letras.forEach(letra->{
-//            System.out.println(letra.toString());
-//        });
+        System.out.println("-------------------------");
+        System.out.println("|El Mago de las Palabras|");
+        System.out.println("-------------------------\n");
         int opc = 0;
         while (opc!= 3) {
             // pregunto que acció quiere realizar el usuario
@@ -18,7 +16,7 @@ public class Main {
                 opc = sc.nextInt();
                 sc.nextLine(); // Limpiar el buffer
             } else {
-                System.out.println("Entrada inválida. Debes ingresar un número.");
+                System.out.println("\nEntrada inválida. Debes ingresar un número.");
                 sc.nextLine(); // Limpiar el texto inválido
             }
             // switch de la opción seleccionada
@@ -28,24 +26,24 @@ public class Main {
                     int numJugadores = 0;
                     while (numJugadores<2 || numJugadores>4){
                         // solicito # jugadores
-                        System.out.println("Ingresa el número de jugadores (2 - 4): ");
+                        System.out.println("\nIngresa el número de jugadores (2 - 4): ");
                         if (sc.hasNextInt()) {
                             numJugadores = sc.nextInt();
                             sc.nextLine(); // Limpiar el buffer
                         } else {
-                            System.out.println("Entrada inválida. Debes ingresar un número.");
+                            System.out.println("\nEntrada inválida. Debes ingresar un número.");
                             sc.nextLine(); // Limpiar el texto inválido
                         }
                     }
                    int modalidadInt = 0;
                     while (modalidadInt != 1 && modalidadInt !=2){
                         // solicito modalidad
-                        System.out.println("1. Regular\n2. Experto\nEscoje la modalidad: ");
+                        System.out.println("\n1. Regular\n2. Experto\nEscoje la modalidad: ");
                         if (sc.hasNextInt()) {
                             modalidadInt = sc.nextInt();
                             sc.nextLine(); // Limpiar el buffer
                         } else {
-                            System.out.println("Entrada inválida. Debes ingresar un número.");
+                            System.out.println("\nEntrada inválida. Debes ingresar un número.");
                             sc.nextLine(); // Limpiar el texto inválido
                         }
                     }
@@ -62,18 +60,18 @@ public class Main {
                 case 2:
                     int reglasOpc = 0;
                     while(reglasOpc!=3) {
-                        System.out.println("1. Reglas modalidad Regular\n2. Reglas modalidad Experto\n3. Salir\nIngresa una opción: ");
+                        System.out.println("\n1. Reglas modalidad Regular\n2. Reglas modalidad Experto\n3. Salir\nIngresa una opción: ");
                         if (sc.hasNextInt()) {
                             reglasOpc = sc.nextInt();
                             sc.nextLine(); // Limpiar el buffer
                         } else {
-                            System.out.println("Entrada inválida. Debes ingresar un número.");
+                            System.out.println("\nEntrada inválida. Debes ingresar un número.");
                             sc.nextLine(); // Limpiar el texto inválido
                         }
                         switch (reglasOpc) {
                             // ver reglas de modalidad regular
                             case 1:
-                                System.out.println("Reglas Modalidad Regular:\nRecibe un conjunto de 10 letras y forma todas las palabras válidas" +
+                                System.out.println("\nReglas Modalidad Regular:\nRecibe un conjunto de 10 letras y forma todas las palabras válidas" +
                                                 " posibles con estas para poder puntuar.\n" +
                                         "Al formar una palabra válida, recibe 5 puntos por c/d vocal y 3 por c/d consonante.\n" +
                                         "Si el jugador no forma una palabra válida, entonces pierde 5 puntos.\n" +
@@ -83,7 +81,7 @@ public class Main {
                                 break;
                             // ver reglas de modalidad experto
                             case 2:
-                                System.out.println("Reglas Modalidad Experto:\nRecibe un conjunto de 10 letras y forma todas las palabras válidas" +
+                                System.out.println("\nReglas Modalidad Experto:\nRecibe un conjunto de 10 letras y forma todas las palabras válidas" +
                                                 " posibles con estas para poder puntuar.\n" +
                                                 "Al formar una palabra válida, recibe 5 puntos por c/d vocal y 3 por c/d consonante.\n" +
                                                 "Si el jugador no forma una palabra válida, entonces pierde 5 puntos.\n" +
