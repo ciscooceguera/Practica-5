@@ -113,6 +113,7 @@ public class MagoDeLasPalabras {
                             jugadores.remove(turno-1);
                             jugadores.put(turno-1, puntajeTemp);
                         }
+                        System.out.println("Puntaje acumulado del jugador "+turno+": "+jugadores.get(turno-1));
                         puntajeTurno = 0;
                         cambiarTurno();
                         break;
@@ -268,15 +269,12 @@ public class MagoDeLasPalabras {
                     while(iterator.hasNext()){
                         Palabra palabra = iterator.next();
                         if(jugadorPalabrasUsadas.containsValue(palabra)){
+                            System.out.println(palabra.toString());
                             System.out.println("Palabra usada: "+palabra+". Puntos: "+palabra.obtenerPuntajePalabra());
                         }
                     }
                 }
             }
             }
-            palabrasUsadasEnElTurno.stream().forEach((palabra)->{
-               puntajeAcumulado.addAndGet(palabra.obtenerPuntajePalabra());
-            });
-            System.out.println("Puntaje acumulado hasta el momento: "+puntajeAcumulado.get());
     }
 }
