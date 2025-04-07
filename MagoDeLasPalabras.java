@@ -242,7 +242,7 @@ public class MagoDeLasPalabras {
     public void generarLetras(){
         letras.clear();
         // ciclo for 0 - 9
-        while (letras.size()<32){
+        while (letras.size()<10){
             // creo un objeto letra y la agrego al arraylist de letras
             Letra letraTemporal = new Letra('0');
             Character toma =  letraTemporal.tomarLetra();

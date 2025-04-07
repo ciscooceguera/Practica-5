@@ -11,7 +11,7 @@ public class Main {
 //            System.out.println(letra.toString());
 //        });
         int opc = 0;
-        while (opc!= 3) {
+        while (opc!= 4) {
             // pregunto que acció quiere realizar el usuario
             System.out.println("1. Jugar\n2. Reglas\n3. Créditos\n4. Salir\nIngresa una opción: ");
             if (sc.hasNextInt()) {
