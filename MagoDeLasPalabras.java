@@ -101,8 +101,9 @@ public class MagoDeLasPalabras {
                                     System.out.println("Palabra correcta !");
                                     palabrasUsadasEnElTurno.add(palabra);
                                     jugadorPalabrasUsadas.put(palabra, turno - 1);
-                                    puntajeTurno += encontrarValuePalabraEnHash();
+                                    puntajeTurno = encontrarValuePalabraEnHash();
                                     System.out.println("Puntaje de la palabra: " + palabra.obtejerPuntajePalabra());
+                                    jugadores.put(turno - 1, puntajeTurno);
                                     flagJugadorAdivinoPalabra = 1;
                                     mostrarPuntajes();
                                     cambiarTurno();
@@ -156,14 +157,13 @@ public class MagoDeLasPalabras {
                             case 3:
                                 mostrarPalabrasJugadores();
                                 break;
-
-
                 }
             }
+
         }
         mostrarGanador();
-        mostrarPuntajes();
     }
+
     public boolean validarPalabraEnHashSet(){
         return palabrasUsadasEnElTurno.contains(palabra);
     }
@@ -194,7 +194,7 @@ public class MagoDeLasPalabras {
         if (ganador==-1){
             System.out.println("\nEmpate! Ganadores:");
             for (Integer jugadoresGanadore : jugadoresGanadores) {
-                System.out.println("Jugador " + jugadoresGanadore);
+                System.out.println("Jugador " + (jugadoresGanadore+1));
             }
         }else {
             System.out.println("\nHa ganado el jugador " + ganador);
@@ -253,7 +253,6 @@ public class MagoDeLasPalabras {
         }
     }
     public void cargarPalabras(){
-
         String nombreArchivo ="C:\\Users\\joser\\IdeaProjects\\Practica-5\\palabras.txt";
         try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
             String palabra;
@@ -298,8 +297,8 @@ public class MagoDeLasPalabras {
 
 
     public void mostrarPalabrasJugadores() {
-        Iterator <Palabra> iterator = jugadorPalabrasUsadas.keySet().iterator();
-        if (!jugadorPalabrasUsadas.isEmpty()) {
+        Iterator <Palabra> iterator = palabrasUsadasEnElTurno.iterator();
+        if (!palabrasUsadasEnElTurno.isEmpty()) {
             System.out.println("Listado de palabras usadas: ");
             while (iterator.hasNext()) {
                 Palabra palabra = iterator.next();
