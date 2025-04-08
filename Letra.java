@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
@@ -72,15 +73,20 @@ public class Letra {
 
     public Character tomarLetra(){
         Random rnd = new Random();
-        int tipo = new Random().nextInt(2)+1;
+        int tipo = new Random().nextInt(4)+1;
         Character letra = null;
         switch (tipo){
             case 1:
                 letra =vocales.get(rnd.nextInt(vocales.size()));
-
                 break;
             case 2:
                 letra = consonantes.get(rnd.nextInt(consonantes.size()));
+                break;
+            case 3:
+                letra = consonantes.get(rnd.nextInt(consonantes.size()));
+                break;
+            case 4:
+                letra = consonantes.get(rnd.nextInt(vocales.size()));
                 break;
         }
         return letra;
