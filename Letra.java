@@ -7,21 +7,32 @@ public class Letra {
     private ArrayList<Character> vocales;
     private ArrayList<Character> consonantes;
     private char letra;
-    public Letra(char letra){
+    public Letra(char letra, String modalidad){
         this.letra = letra;
         // genero ArrayList de vocales
         vocales = new ArrayList<Character>();
-        vocales.add('a');
-        vocales.add('e');
-        vocales.add('i');
-        vocales.add('o');
-        vocales.add('u');
-        vocales.add('á');
-        vocales.add('é');
-        vocales.add('í');
-        vocales.add('ó');
-        vocales.add('ú');
         consonantes = new ArrayList<>();
+        switch (modalidad) {
+            case "Regular":
+                vocales.add('a');
+                vocales.add('e');
+                vocales.add('i');
+                vocales.add('o');
+                vocales.add('u');
+                break;
+            case "Experto":
+                vocales.add('a');
+                vocales.add('e');
+                vocales.add('i');
+                vocales.add('o');
+                vocales.add('u');
+                vocales.add('á');
+                vocales.add('é');
+                vocales.add('í');
+                vocales.add('ó');
+                vocales.add('ú');
+                break;
+        }
         consonantes.add('b');
         consonantes.add('c');
         consonantes.add('d');
@@ -66,6 +77,7 @@ public class Letra {
         switch (tipo){
             case 1:
                 letra =vocales.get(rnd.nextInt(vocales.size()));
+
                 break;
             case 2:
                 letra = consonantes.get(rnd.nextInt(consonantes.size()));

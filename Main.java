@@ -88,7 +88,7 @@ public class Main {
                                         "No podrás repetir palabras en una ronda.\nUna ronda termina si todos los jugadores" +
                                         " acuerdan no poder escribir más palabras.\nAl pasar 3 rondas el ganador será aquel" +
                                         " que haya acumulado una mayor cantidad de puntos\n" +
-                                        "Regla experto: Al inicio de cada ronda se generará una letra de manera aleatoria" +
+                                        "Regla experto: También se te darán letras con acento" +
                                         "la cual no podrá ser utilizada para formar palabras.");
                                 break;
                             // salir de las reglas
