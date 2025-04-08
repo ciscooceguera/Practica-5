@@ -202,7 +202,7 @@ public class MagoDeLasPalabras {
         // imprimo quien está jugando actualmente y su puntaje hasta el momento
         Scanner sc = new Scanner(System.in);
         System.out.println("\nTurno actual: "+turno);
-        System.out.println("\n1. Escribir palabra\n2. Pasar turno\n3. Ver Palabras adivinadas del jugador actual\nIngresa la opción: ");
+        System.out.println("\n1. Escribir palabra\n2. Pasar turno\n3. Ver palabras adivinadas\nIngresa la opción: ");
         int opc = 0;
         if (sc.hasNextInt()) {
             opc = sc.nextInt();
@@ -242,7 +242,7 @@ public class MagoDeLasPalabras {
     }
     public void cargarPalabras(){
 
-        String nombreArchivo ="C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Practica-5\\palabras.txt";
+        String nombreArchivo ="C:\\Users\\joser\\IdeaProjects\\Practica-5\\palabras.txt";
         try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
             String palabra;
             Integer puntaje;
