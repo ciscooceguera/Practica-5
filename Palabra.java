@@ -5,13 +5,15 @@ public class Palabra {
     // atributos
     private String palabra;
     private int puntaje;
+    private String modalidad;
     // constructor, recibe palabra
-    public Palabra(String palabra){
+    public Palabra(String palabra, String modalidad){
         if (palabra == null || palabra.isEmpty()) {
             throw new IllegalArgumentException("La palabra no puede ser nula o vacía.");
         }
         this.palabra = palabra;
         puntaje = 0;
+        this.modalidad = modalidad;
     }
     // obtiene el puntaje de la palabra
     public int obtejerPuntajePalabra(){
@@ -19,7 +21,7 @@ public class Palabra {
         // itero cada elemento del string
         for (int i = 0; i<palabra.length(); i++){
             // creo objeto de la palabra letra
-            Letra letra = new Letra(palabra.charAt(i));
+            Letra letra = new Letra(palabra.charAt(i),modalidad);
             // es vocal
             if (letra.esVocal()){
                 puntaje+=5;
@@ -39,19 +41,18 @@ public class Palabra {
     public ArrayList<Letra> obtenerLetras(){
         ArrayList<Letra> letras = new ArrayList<>();
         for (int i = 0; i<palabra.length(); i++){
-            Letra letra = new Letra(palabra.charAt(i));
+            Letra letra = new Letra(palabra.charAt(i),modalidad);
             letras.add(letra);
         }
         return letras;
     }
-    public boolean palabraContieneLasLetras(HashSet<Letra> letrasUsadas, Letra letraProhibida){
+    public boolean palabraContieneLasLetras(HashSet<Letra> letrasUsadas){
         ArrayList<Letra> palabraUsadaArrayList = obtenerLetras();
         int contadorLetrasUsadas = 0;
         for (Letra letra : palabraUsadaArrayList) {
             if (letrasUsadas.contains(letra)) {
-                if (!letra.equals(letraProhibida)){
                     contadorLetrasUsadas++;
-                }
+
             }
         }
         return contadorLetrasUsadas == palabraUsadaArrayList.size();
