@@ -193,7 +193,7 @@ public class MagoDeLasPalabras {
         if (ganador==-1){
             System.out.println("\nEmpate! Ganadores:");
             for (Integer jugadoresGanadore : jugadoresGanadores) {
-                System.out.println("Jugador " + jugadoresGanadore);
+                System.out.println("Jugador " + (jugadoresGanadore+1));
             }
         }else {
             System.out.println("\nHa ganado el jugador " + ganador);
