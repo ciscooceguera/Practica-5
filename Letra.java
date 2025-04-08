@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
@@ -6,24 +7,33 @@ public class Letra {
     // atributos
     private ArrayList<Character> vocales;
     private ArrayList<Character> consonantes;
-    private ArrayList<Character> acentos;
     private char letra;
-    public Letra(char letra){
+    public Letra(char letra, String modalidad){
         this.letra = letra;
         // genero ArrayList de vocales
-        vocales = new ArrayList<>();
-        vocales.add('a');
-        vocales.add('e');
-        vocales.add('i');
-        vocales.add('o');
-        vocales.add('u');
-        acentos = new ArrayList<>();
-        acentos.add('á');
-        acentos.add('é');
-        acentos.add('í');
-        acentos.add('ó');
-        acentos.add('ú');
+        vocales = new ArrayList<Character>();
         consonantes = new ArrayList<>();
+        switch (modalidad) {
+            case "Regular":
+                vocales.add('a');
+                vocales.add('e');
+                vocales.add('i');
+                vocales.add('o');
+                vocales.add('u');
+                break;
+            case "Experto":
+                vocales.add('a');
+                vocales.add('e');
+                vocales.add('i');
+                vocales.add('o');
+                vocales.add('u');
+                vocales.add('á');
+                vocales.add('é');
+                vocales.add('í');
+                vocales.add('ó');
+                vocales.add('ú');
+                break;
+        }
         consonantes.add('b');
         consonantes.add('c');
         consonantes.add('d');
@@ -76,7 +86,7 @@ public class Letra {
                 letra = consonantes.get(rnd.nextInt(consonantes.size()));
                 break;
             case 4:
-                letra = consonantes.get(rnd.nextInt(consonantes.size()));
+                letra = consonantes.get(rnd.nextInt(vocales.size()));
                 break;
         }
         return letra;
