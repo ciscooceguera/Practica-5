@@ -32,11 +32,7 @@ public class Palabra {
         }
         return puntaje;
     }
-    // recibe palabra y evalua si es igual
-    public boolean palabraEsIgualA(Palabra otraPalabra){
-        // compara si son iguales ignorando mayusculas y minusculas
-        return this.palabra.equalsIgnoreCase(otraPalabra.palabra);
-    }
+
     // separar palabra en arraylist de caracteres
     public ArrayList<Letra> obtenerLetras(){
         ArrayList<Letra> letras = new ArrayList<>();
