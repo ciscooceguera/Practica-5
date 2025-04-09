@@ -241,8 +241,12 @@ public class MagoDeLasPalabras {
         }
     }
     public void cargarPalabras(){
-
-        String nombreArchivo ="C:\\Users\\joser\\IdeaProjects\\Practica-5\\palabras.txt";
+        String nombreArchivo = "";
+        if(modalidad.equals("Experto")){
+            nombreArchivo ="C:\\Users\\joser\\IdeaProjects\\Practica-5\\palabras.txt";
+        } else {
+            nombreArchivo ="C:\\Users\\joser\\IdeaProjects\\Practica-5\\palabrasNoAcentos.txt";
+        }
         try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
             String palabra;
             Integer puntaje;
