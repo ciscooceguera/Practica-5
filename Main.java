@@ -7,11 +7,11 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         System.out.println("-------------------------");
         System.out.println("|El Mago de las Palabras|");
-        System.out.println("-------------------------\n");
+        System.out.println("-------------------------");
         int opc = 0;
         while (opc != 4) {
             // pregunto que acció quiere realizar el usuario
-            System.out.println("\n1. Jugar\n2. Reglas\n3. Créditos\n4. Salir\nIngresa una opción: ");
+            System.out.println("1. Jugar\n2. Reglas\n3. Créditos\n4. Salir\nIngresa una opción: ");
             if (sc.hasNextInt()) {
                 opc = sc.nextInt();
                 sc.nextLine(); // Limpiar el buffer
